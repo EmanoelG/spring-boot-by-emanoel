@@ -33,6 +33,8 @@ public class PersonServices {
 
 	public List<PersonVO> findAll() {
 		logger.info("FindAll one PersonVO !");
+		
+		
 		return DozerMapper.parseListObject(repository.findAll(), PersonVO.class);
 	}
 
