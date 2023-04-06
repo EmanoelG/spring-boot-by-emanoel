@@ -1,5 +1,6 @@
 package br.com.emanoel.habilidades.services;
-
+import org.springframework.hateoas.server.mvc.MvcLink;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.emanoel.habilidades.PersonRepositories.PersonRespository;
+import br.com.emanoel.habilidades.controllers.PersonController;
 import br.com.emanoel.habilidades.data.vo.v1.PersonVO;
 import br.com.emanoel.habilidades.data.vo.v2.PersonVOV2;
 import br.com.emanoel.habilidades.exceptions.ResourceNotFoundException;
@@ -25,16 +27,17 @@ public class PersonServices {
 	@Autowired
 	PersonMapper mapper;
 
-	public PersonVO findById(Long id) {
+	public PersonVO findById(Long id) throws Exception {
 		var entity = repository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this Id !"));
-		return DozerMapper.parseObject(entity, PersonVO.class);
+		PersonVO vo = DozerMapper.parseObject(entity, PersonVO.class);
+		 vo.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
+		 return vo;
 	}
 
 	public List<PersonVO> findAll() {
 		logger.info("FindAll one PersonVO !");
-		
-		
+
 		return DozerMapper.parseListObject(repository.findAll(), PersonVO.class);
 	}
 
