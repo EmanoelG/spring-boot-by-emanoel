@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,17 +31,24 @@ public class PersonController {
 	public PersonVO findById(@PathVariable("id") Long id) throws Exception {
 		return service.findById(id);
 	}
-
+	
+	@PutMapping(value = "/", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	public PersonVO update(@RequestBody PersonVO person) throws Exception {
+		logger.info("Upadte user  !!!");
+		return service.update(person);
+	}
+	
 	@GetMapping(produces ={ MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public List<PersonVO> findAll() throws Exception {
+		
 		return service.findAll();
 	}
 
 	@PostMapping(value = "/", consumes = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE,
 					MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<PersonVO> findCreate(@RequestBody PersonVO perso) throws Exception {
-		return ResponseEntity.status(HttpStatus.CREATED).body(service.create(perso));
+	public ResponseEntity<PersonVO> findCreate(@RequestBody PersonVO person) throws Exception {
+		return ResponseEntity.status(HttpStatus.CREATED).body(service.create(person));
 	}
 
 	@PostMapping(value = "/v2", consumes = { MediaType.APPLICATION_JSON_VALUE,

@@ -1,15 +1,35 @@
 package br.com.emanoel.habilidades.data.vo.v2;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-public class PersonVOV2 {
+import org.springframework.hateoas.RepresentationModel;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import br.com.emanoel.habilidades.data.vo.v1.PersonVO;
+
+public class PersonVOV2 extends RepresentationModel<PersonVO> implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Long id;
+	@JsonProperty("nome")
 	private String firstName;
+	
+	@JsonProperty("Sobre-nome")
 	private String lastName;
+	
+	@JsonProperty("endereco")
 	private String address;
+	
+	@JsonProperty("sexo")
 	private String gender;
+	
+	@JsonProperty("data-nascimento")
 	private Date birthDay;
 
 	public Date getBirthDay() {

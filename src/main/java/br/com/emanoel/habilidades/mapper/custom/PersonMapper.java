@@ -28,7 +28,7 @@ public class PersonMapper {
 		entity.setLastName(person.getLastName());
 		entity.setGender(person.getGender());
 		entity.setAddress(person.getAddress());
-//		entity.setBirthDay(new Date());
+		//entity.setBirthDay(new Date());
 		return entity;
 	}
 
