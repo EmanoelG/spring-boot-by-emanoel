@@ -38,25 +38,6 @@ public class PersonServices {
 		vo.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
 		return vo;
 	}
-//
-//	public List<PersonVO> findAll() {
-//		logger.info("FindAll one PersonVO !");
-//
-//		var persons = DozerMapper.parseListObject(repository.findAll(), PersonVO.class);
-//		persons.stream().forEach(p -> {
-//			try {
-//				p.add(linkTo(methodOn(PersonController.class).findById(p.getId())).withSelfRel(),
-//						linkTo(methodOn(PersonController.class).update(p)).withSelfRel()
-//
-//				);
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		});
-//
-//		return persons;
-//	}
 
 	public List<PersonVO> findAll() {
 		List<PersonVO> persons = DozerMapper.parseListObject(repository.findAll(), PersonVO.class);
