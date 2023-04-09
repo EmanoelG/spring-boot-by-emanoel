@@ -47,7 +47,6 @@ public class PersonServices {
 				p.add(linkTo(methodOn(PersonController.class).findById(p.getId())).withSelfRel().withRel("get"));
 				p.add(linkTo(methodOn(PersonController.class).update(p)).withSelfRel().withRel("put"));
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		});
