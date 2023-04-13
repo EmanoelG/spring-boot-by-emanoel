@@ -27,17 +27,16 @@ public class PersonServices {
 
 	@Autowired
 	PersonRespository repository;
-	
-	
 
 	@Autowired
 	PersonMapper mapper;
 
 	public PersonVO findById(Long id) throws Exception {
+		System.out.println(" Find A !!"+id);
 		var entity = repository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this Id !"));
 		PersonVO vo = DozerMapper.parseObject(entity, PersonVO.class);
-		
+		System.out.println(" Findddd B !!");
 		vo.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
 		return vo;
 	}

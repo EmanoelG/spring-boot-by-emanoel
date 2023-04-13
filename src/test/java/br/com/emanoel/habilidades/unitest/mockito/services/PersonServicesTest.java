@@ -15,9 +15,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import br.com.emanoel.habilidades.PersonRepositories.PersonRespository;
+import br.com.emanoel.habilidades.data.vo.v1.PersonVO;
 import br.com.emanoel.habilidades.mock.person.MockPerson;
 import br.com.emanoel.habilidades.models.Person;
-import br.com.emanoel.habilidades.repositories.PersonRepository;
 import br.com.emanoel.habilidades.services.PersonServices;
 
 @TestInstance(Lifecycle.PER_CLASS)
@@ -30,26 +31,26 @@ class PersonServicesTest {
 	private PersonServices service;
 
 	@Mock
-	PersonRepository repository;
+	PersonRespository repository;
 
 	@BeforeEach
 	void setUp() throws Exception {
 		input = new MockPerson();
+
 		MockitoAnnotations.openMocks(this);
 	}
 
 	@Test
 	void testFindById() throws Exception {
-		Person person = input.mockEntity();
+		Person person = input.mockEntity(1);
 		person.setId(1L);
 		when(repository.findById(1L)).thenReturn(Optional.of(person));
-		var result = service.findById(1L);
-		assertNotNull(result);
-		assertNotNull(result.getId());
-		assertNotNull(result.getLinks());
-		assertNotNull(result.toString().contains(""));
-		System.out.println(result.toString());
-		fail("Not yet implemented");
+		var results = service.findById(1L);
+		assertNotNull(results);
+		assertNotNull(results.getId());
+		assertNotNull(results.getLinks());
+		assertTrue(results.toString().contains("</persons/1>;rel=\"self\""));
+		assertEquals("Emanoel Galvao", results.getFirstName());
 	}
 
 	@Test
