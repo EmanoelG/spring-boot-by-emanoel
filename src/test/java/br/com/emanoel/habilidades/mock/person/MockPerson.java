@@ -9,11 +9,11 @@ import br.com.emanoel.habilidades.models.Person;
 public class MockPerson {
 
 	public Person mockEntity() {
-		return mockEntity(0);
+		return mockEntity(1);
 	}
 
 	public PersonVO mockVO() {
-		return mockVO(0);
+		return mockVO(1);
 	}
 
 	public List<Person> mockEntityList() {
