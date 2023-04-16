@@ -32,11 +32,9 @@ public class PersonServices {
 	PersonMapper mapper;
 
 	public PersonVO findById(Long id) throws Exception {
-		System.out.println(" Find A !!"+id);
 		var entity = repository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this Id !"));
 		PersonVO vo = DozerMapper.parseObject(entity, PersonVO.class);
-		System.out.println(" Findddd B !!");
 		vo.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
 		return vo;
 	}
@@ -59,7 +57,7 @@ public class PersonServices {
 		logger.info("Create one PersonVO !");
 		var entity = DozerMapper.parseObject(personvo, Person.class);
 		var vo = DozerMapper.parseObject(repository.save(entity), PersonVO.class);
-		vo.add(linkTo(methodOn(PersonController.class).findById(vo.getId())).withSelfRel());
+		vo.add(linkTo(methodOn(PersonController.class).findById(vo.getId())).withSelfRel());//
 		return vo;
 	}
 

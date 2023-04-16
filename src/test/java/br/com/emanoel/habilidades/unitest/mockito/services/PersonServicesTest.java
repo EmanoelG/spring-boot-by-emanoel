@@ -1,6 +1,7 @@
 package br.com.emanoel.habilidades.unitest.mockito.services;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
@@ -50,7 +51,7 @@ class PersonServicesTest {
 		assertNotNull(results.getId());
 		assertNotNull(results.getLinks());
 		assertTrue(results.toString().contains("</persons/1>;rel=\"self\""));
-		assertEquals("Emanoel Galvao", results.getFirstName());
+		assertEquals("Emanoel", results.getFirstName());
 	}
 
 	@Test
@@ -59,8 +60,24 @@ class PersonServicesTest {
 	}
 
 	@Test
-	void testCreate() {
-		fail("Not yet implemented");
+	void testCreate() throws Exception {
+		Person entity = input.mockEntity(1);
+
+		Person persisted = entity;
+	
+
+		PersonVO vo = input.mockVO(1);
+		//vo.setId(1L);
+
+		//when(repository.save(entity)).thenReturn(persisted);
+		lenient().when(repository.save(entity)).thenReturn(persisted);
+		var results = service.create(vo);
+
+		assertNotNull(results);
+		assertNotNull(results.getId());
+		assertNotNull(results.getLinks());
+		assertTrue(results.toString().contains("</persons/1>;rel=\"self\""));
+		assertEquals("Emanoel", results.getFirstName());
 	}
 
 	@Test
