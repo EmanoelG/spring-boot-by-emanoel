@@ -34,21 +34,21 @@ public class MockPerson {
 
 	public Person mockEntity(Integer number) {
 		Person person = new Person();
-		person.setAddress("Addres Test" + number);
-		person.setFirstName("Emanoel Galvao");
-		person.setGender(((number % 2) == 0) ? "Male" : "Female");
+		person.setAddress("Addres Test");
+		person.setFirstName("Emanoel");
+		person.setGender("Male");
 		person.setId(number.longValue());
-		person.setLastName("Da silvaa");
+		person.setLastName("Galvao");
 		return person;
 	}
 
 	public PersonVO mockVO(Integer number) {
 		PersonVO person = new PersonVO();
-		person.setAddress("Addres Test" + number);
-		person.setFirstName("First Name Test" + number);
-		person.setGender(((number % 2) == 0) ? "Male" : "Female");
+		person.setAddress("Addres Test");
+		person.setFirstName("Emanoel");
+		person.setGender("Male");
 		person.setId(number.longValue());
-		person.setLastName("Last Name Test" + number);
+		person.setLastName("Galvao");
 		return person;
 	}
 
