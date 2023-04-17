@@ -13,11 +13,13 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import br.com.emanoel.habilidades.PersonRepositories.PersonRespository;
 import br.com.emanoel.habilidades.data.vo.v1.PersonVO;
+import br.com.emanoel.habilidades.exceptions.ResourceIsNullException;
 import br.com.emanoel.habilidades.mock.person.MockPerson;
 import br.com.emanoel.habilidades.models.Person;
 import br.com.emanoel.habilidades.services.PersonServices;
@@ -64,12 +66,11 @@ class PersonServicesTest {
 		Person entity = input.mockEntity(1);
 
 		Person persisted = entity;
-	
 
 		PersonVO vo = input.mockVO(1);
-		//vo.setId(1L);
+		// vo.setId(1L);
 
-		//when(repository.save(entity)).thenReturn(persisted);
+		// when(repository.save(entity)).thenReturn(persisted);
 		lenient().when(repository.save(entity)).thenReturn(persisted);
 		var results = service.create(vo);
 
@@ -81,18 +82,59 @@ class PersonServicesTest {
 	}
 
 	@Test
+	void testCreateWithNull() throws Exception {
+		Exception exception = assertThrows(ResourceIsNullException.class, () -> {
+			var results = service.create(null);
+		});
+		String expectedMessage = "Não é permitido persistir um objeto nullo !";
+		String actualMessage = exception.getMessage();
+
+		assertTrue(actualMessage.contains(expectedMessage));
+
+	}
+
+	@Test
+	void testUpdateWithNull() throws Exception {
+		Exception exception = assertThrows(ResourceIsNullException.class, () -> {
+			var results = service.update(null);
+		});
+		String expectedMessage = "Não é permitido persistir um objeto nullo !";
+		String actualMessage = exception.getMessage();
+
+		assertTrue(actualMessage.contains(expectedMessage));
+
+	}
+
+	@Test
 	void testCreateV2() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	void testUpdate() {
-		fail("Not yet implemented");
+	void testUpdate() throws Exception {
+		Person entity = input.mockEntity(1);
+
+		Person persisted = entity;
+
+		PersonVO vo = input.mockVO(1);
+		// vo.setId(1L);
+		when(repository.findById(1L)).thenReturn(Optional.of(entity));
+		lenient().when(repository.save(entity)).thenReturn(persisted);
+		var results = service.update(vo);
+		assertNotNull(results);
+		assertNotNull(results.getId());
+		assertNotNull(results.getLinks());
+		assertTrue(results.toString().contains("</persons/1>;rel=\"self\""));
+		assertEquals("Emanoel", results.getFirstName());
 	}
 
 	@Test
-	void testDelete() {
-		fail("Not yet implemented");
+	void testDelete() throws Exception {
+		Person entity = input.mockEntity(1);
+		PersonVO vo = input.mockVO(1);
+
+		Mockito.doNothing().when(repository).delete(entity);
+
 	}
 
 }

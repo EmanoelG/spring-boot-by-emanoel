@@ -15,6 +15,7 @@ import br.com.emanoel.habilidades.PersonRepositories.PersonRespository;
 import br.com.emanoel.habilidades.controllers.PersonController;
 import br.com.emanoel.habilidades.data.vo.v1.PersonVO;
 import br.com.emanoel.habilidades.data.vo.v2.PersonVOV2;
+import br.com.emanoel.habilidades.exceptions.ResourceIsNullException;
 import br.com.emanoel.habilidades.exceptions.ResourceNotFoundException;
 import br.com.emanoel.habilidades.mapper.DozerMapper;
 import br.com.emanoel.habilidades.mapper.custom.PersonMapper;
@@ -54,10 +55,13 @@ public class PersonServices {
 	}
 
 	public PersonVO create(PersonVO personvo) throws Exception {
+		if (personvo == null)
+			throw new ResourceIsNullException();
 		logger.info("Create one PersonVO !");
 		var entity = DozerMapper.parseObject(personvo, Person.class);
 		var vo = DozerMapper.parseObject(repository.save(entity), PersonVO.class);
-		vo.add(linkTo(methodOn(PersonController.class).findById(vo.getId())).withSelfRel());//
+		vo.add(linkTo(methodOn(PersonController.class).findById(vo.getId())).withSelfRel());
+
 		return vo;
 	}
 
