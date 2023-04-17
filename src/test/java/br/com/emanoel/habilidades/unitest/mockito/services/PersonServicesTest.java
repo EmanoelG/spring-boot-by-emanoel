@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -58,7 +59,13 @@ class PersonServicesTest {
 
 	@Test
 	void testFindAll() {
-		fail("Not yet implemented");
+		List<Person> list = input.mockEntityList();
+		when(repository.findAll()).thenReturn(list);
+		var people = service.findAll();
+
+		assertNotNull(people);
+		assertEquals(14, people.size());
+		assertNotNull(people.get(5).getLinks());
 	}
 
 	@Test
