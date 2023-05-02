@@ -36,15 +36,6 @@ public class PersonController {
 	private PersonServices service;
 
 	@GetMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	@Operation(summary = "Busca pessoa por ID ", description = "Busca pessoa por ID", tags = { "People" }, responses = {
-			@ApiResponse(responseCode = "200", content = {
-			@ApiResponse(responseCode = "400", content = @Content, description = "Bad request"),
-			@ApiResponse(responseCode = "401", content = @Content, description = "Unathorized"),
-			@ApiResponse(responseCode = "500", content = @Content, description = "Internal Error")
-
-	}
-
-	)
 	public PersonVO findById(@PathVariable("id") Long id) throws Exception {
 		return service.findById(id);
 	}
@@ -66,7 +57,6 @@ public class PersonController {
 	}
 
 	)
-
 	public List<PersonVO> findAll() throws Exception {
 
 		return service.findAll();

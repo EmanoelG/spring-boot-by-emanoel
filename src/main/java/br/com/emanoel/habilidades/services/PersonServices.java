@@ -1,6 +1,5 @@
 package br.com.emanoel.habilidades.services;
 
-import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.mvc.MvcLink;
 import org.springframework.http.HttpMethod;
 
