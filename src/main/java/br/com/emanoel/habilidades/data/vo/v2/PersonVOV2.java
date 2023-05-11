@@ -7,9 +7,11 @@ import java.util.Objects;
 import org.springframework.hateoas.RepresentationModel;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import br.com.emanoel.habilidades.data.vo.v1.PersonVO;
 
+@JsonPropertyOrder({ "id", "Sobre-nome", "nome", "sexo", "data-nascimento", "endereco" })
 public class PersonVOV2 extends RepresentationModel<PersonVO> implements Serializable {
 
 	/**

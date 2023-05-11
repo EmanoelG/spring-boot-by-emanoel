@@ -48,7 +48,7 @@ public class MockBook {
 		LocalDate publicationDate = LocalDate.parse("29/07/1954", dtf);
 		Instant instant = publicationDate.atStartOfDay(ZoneId.systemDefault()).toInstant();
 		Date date = Date.from(instant);
-		books.setDataPublicao(date);
+		books.setAnoPublicacao(date);
 		books.toString();
 		return books;
 	}

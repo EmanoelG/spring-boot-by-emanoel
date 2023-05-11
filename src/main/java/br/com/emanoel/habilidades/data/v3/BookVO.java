@@ -7,8 +7,10 @@ import java.util.Objects;
 import org.springframework.hateoas.RepresentationModel;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-public class BookVO extends RepresentationModel<BookVO> implements Serializable{
+@JsonPropertyOrder({ "id", "autor", "titulo", "categoria", "Ano publicacao" })
+public class BookVO extends RepresentationModel<BookVO> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Long id;
@@ -22,7 +24,7 @@ public class BookVO extends RepresentationModel<BookVO> implements Serializable{
 	@JsonProperty("categoria")
 	private String categoria;
 
-	@JsonProperty("anoPublicacao")
+	@JsonProperty("Ano publicacao")
 	private Date anoPublicacao;
 
 	@Override
@@ -86,7 +88,5 @@ public class BookVO extends RepresentationModel<BookVO> implements Serializable{
 	public void setAnoPublicacao(Date anoPublicacao) {
 		this.anoPublicacao = anoPublicacao;
 	}
-
-	
 
 }

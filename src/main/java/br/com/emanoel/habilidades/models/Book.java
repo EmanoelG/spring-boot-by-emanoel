@@ -1,6 +1,7 @@
 package br.com.emanoel.habilidades.models;
 
 import java.util.Date;
+import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,7 +30,7 @@ public class Book {
 	private String categoria;
 
 	@Column(name = "bk_ano_publicao", nullable = false, length = 100)
-	private Date dataPublicao;
+	private Date anoPublicacao;
 
 	public Long getId() {
 		return id;
@@ -63,18 +64,37 @@ public class Book {
 		this.categoria = categoria;
 	}
 
-	public Date getDataPublicao() {
-		return dataPublicao;
+	public Date getAnoPublicacao() {
+		return anoPublicacao;
 	}
 
-	public void setDataPublicao(Date dataPublicao) {
-		this.dataPublicao = dataPublicao;
+	public void setAnoPublicacao(Date anoPublicacao) {
+		this.anoPublicacao = anoPublicacao;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(anoPublicacao, autor, categoria, id, titulo);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Book other = (Book) obj;
+		return Objects.equals(anoPublicacao, other.anoPublicacao) && Objects.equals(autor, other.autor)
+				&& Objects.equals(categoria, other.categoria) && Objects.equals(id, other.id)
+				&& Objects.equals(titulo, other.titulo);
 	}
 
 	@Override
 	public String toString() {
 		return "Book [id=" + id + ", titulo=" + titulo + ", autor=" + autor + ", categoria=" + categoria
-				+ ", dataPublicao=" + dataPublicao + "]";
+				+ ", anoPublicacao=" + anoPublicacao + "]";
 	}
 
 }
