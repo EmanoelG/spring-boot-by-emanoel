@@ -1,8 +1,12 @@
 package br.com.emanoel.habilidades.models;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
+import org.springframework.hateoas.RepresentationModel;
+
+import br.com.emanoel.habilidades.data.v3.BookVO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,7 +16,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "book")
-public class Book {
+public class Book  {
 	private static final long serialVersionUID = 1L;
 
 	@Id
