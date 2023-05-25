@@ -14,19 +14,25 @@ import org.testcontainers.lifecycle.Startables;
 
 @ContextConfiguration(initializers = AbstractIntegrationTest.Initializer.class)
 public class AbstractIntegrationTest {
-	public class Initializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
+	static class Initializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
-		private static final PostgreSQLContainer<?> POSTGRESQL_CONTAINER;
-
+		static final PostgreSQLContainer<?> POSTGRESQL_CONTAINER;
+		
 		static {
-			POSTGRESQL_CONTAINER = new PostgreSQLContainer<>("postgres:latest").withDatabaseName("bucetinha")
+			POSTGRESQL_CONTAINER = new PostgreSQLContainer<>("postgres:14.8").withDatabaseName("bucetinha")
 					.withUsername("wrpdv").withPassword("rpdvwin1064");
 			POSTGRESQL_CONTAINER.start();
 		}
 
+		private static void startContainer() {
+			Startables.deepStart(Stream.of(POSTGRESQL_CONTAINER)).join();
+		}
+
 		private static Map<String, String> createConnectionConfiguration() {
 
-			return Map.of("spring.datasource.url", POSTGRESQL_CONTAINER.getJdbcUrl(), "spring.datasource.username",
+			return Map.of("spring.datasource.url",
+					POSTGRESQL_CONTAINER.getJdbcUrl(), 
+					"spring.datasource.username",
 					POSTGRESQL_CONTAINER.getUsername(), "spring.datasource.password",
 					POSTGRESQL_CONTAINER.getPassword());
 		}
@@ -36,19 +42,15 @@ public class AbstractIntegrationTest {
 		public void initialize(ConfigurableApplicationContext applicationContext) {
 			startContainer();
 
-			String url = POSTGRESQL_CONTAINER.getJdbcUrl();
-			String username = POSTGRESQL_CONTAINER.getUsername();
-			String password = POSTGRESQL_CONTAINER.getPassword();
+//			String url = POSTGRESQL_CONTAINER.getJdbcUrl();
+//			String username = POSTGRESQL_CONTAINER.getUsername();
+//			String password = POSTGRESQL_CONTAINER.getPassword();
 
 			ConfigurableEnvironment environment = applicationContext.getEnvironment();
 			MapPropertySource testeContainers = new MapPropertySource("testeContainers",
 					(Map) createConnectionConfiguration());
 
 			environment.getPropertySources().addFirst(testeContainers);
-		}
-
-		private static void startContainer() {
-			Startables.deepStart(Stream.of(POSTGRESQL_CONTAINER)).join();
 		}
 
 	}
