@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import br.com.emanoel.habilidades.BookRepositories.BookRepository;
 import br.com.emanoel.habilidades.controllers.BookController;
