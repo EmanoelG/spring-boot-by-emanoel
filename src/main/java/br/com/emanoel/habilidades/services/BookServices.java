@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import br.com.emanoel.habilidades.BookRepositories.BookRepository;
 import br.com.emanoel.habilidades.controllers.BookController;
 import br.com.emanoel.habilidades.controllers.PersonController;
 import br.com.emanoel.habilidades.data.v3.BookVO;
@@ -20,6 +19,7 @@ import br.com.emanoel.habilidades.exceptions.ResourceNotFoundException;
 import br.com.emanoel.habilidades.mapper.DozerMapper;
 import br.com.emanoel.habilidades.models.Book;
 import br.com.emanoel.habilidades.models.Person;
+import br.com.emanoel.habilidades.repository.BookRepository;
 
 @Service
 public class BookServices {

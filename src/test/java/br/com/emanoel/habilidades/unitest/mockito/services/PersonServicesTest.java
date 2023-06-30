@@ -18,11 +18,11 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import br.com.emanoel.habilidades.PersonRepositories.PersonRespository;
 import br.com.emanoel.habilidades.data.vo.v1.PersonVO;
 import br.com.emanoel.habilidades.exceptions.ResourceIsNullException;
 import br.com.emanoel.habilidades.mock.person.MockPerson;
 import br.com.emanoel.habilidades.models.Person;
+import br.com.emanoel.habilidades.repository.PersonRespository;
 import br.com.emanoel.habilidades.services.PersonServices;
 
 @TestInstance(Lifecycle.PER_CLASS)

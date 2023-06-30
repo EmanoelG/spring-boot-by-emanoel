@@ -19,12 +19,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import br.com.emanoel.habilidades.BookRepositories.BookRepository;
 import br.com.emanoel.habilidades.data.v3.BookVO;
 import br.com.emanoel.habilidades.data.vo.v1.PersonVO;
 import br.com.emanoel.habilidades.mock.book.MockBook;
 import br.com.emanoel.habilidades.models.Book;
 import br.com.emanoel.habilidades.models.Person;
+import br.com.emanoel.habilidades.repository.BookRepository;
 import br.com.emanoel.habilidades.services.BookServices;
 
 @TestInstance(Lifecycle.PER_CLASS)

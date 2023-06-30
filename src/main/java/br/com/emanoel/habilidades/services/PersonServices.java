@@ -10,7 +10,6 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.emanoel.habilidades.PersonRepositories.PersonRespository;
 import br.com.emanoel.habilidades.controllers.PersonController;
 import br.com.emanoel.habilidades.data.vo.v1.PersonVO;
 import br.com.emanoel.habilidades.data.vo.v2.PersonVOV2;
@@ -19,6 +18,7 @@ import br.com.emanoel.habilidades.exceptions.ResourceNotFoundException;
 import br.com.emanoel.habilidades.mapper.DozerMapper;
 import br.com.emanoel.habilidades.mapper.custom.PersonMapper;
 import br.com.emanoel.habilidades.models.Person;
+import br.com.emanoel.habilidades.repository.PersonRespository;
 
 @Service
 public class PersonServices {
