@@ -6,11 +6,10 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import br.com.emanoel.habilidades.models.Users;
-import io.swagger.v3.oas.annotations.Parameter;
 
 @Repository
 public interface UserRepository extends JpaRepository<Users, Long> {
 
-	@Query("SELECT u FROM users where u.userName =:userName ")
-	Users findByUsername(@Param("username") String userName);
+	@Query(value = "SELECT * FROM Users u WHERE u.user_name = :userName", nativeQuery = true)
+	Users findByUsername(@Param("userName") String userName);
 }

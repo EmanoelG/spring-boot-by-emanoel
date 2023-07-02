@@ -1,30 +1,21 @@
 package br.com.emanoel.habilidades.services;
 
-import org.springframework.hateoas.server.mvc.MvcLink;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
-
-import java.util.Collection;
-import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import br.com.emanoel.habilidades.controllers.PersonController;
 import br.com.emanoel.habilidades.data.vo.v1.PersonVO;
-import br.com.emanoel.habilidades.data.vo.v2.PersonVOV2;
-import br.com.emanoel.habilidades.exceptions.ResourceIsNullException;
 import br.com.emanoel.habilidades.exceptions.ResourceNotFoundException;
 import br.com.emanoel.habilidades.mapper.DozerMapper;
-import br.com.emanoel.habilidades.mapper.custom.PersonMapper;
-import br.com.emanoel.habilidades.models.Person;
-import br.com.emanoel.habilidades.repository.PersonRespository;
+import br.com.emanoel.habilidades.models.Users;
 import br.com.emanoel.habilidades.repository.UserRepository;
 
 @Service
@@ -35,12 +26,11 @@ public class UsersServices implements UserDetailsService {
 	@Autowired
 	UserRepository repository;
 
-	public PersonVO findById(Long id) throws Exception {
+	public Users findById(Long id) throws Exception {
 		var entity = repository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this Id !"));
-		PersonVO vo = DozerMapper.parseObject(entity, PersonVO.class);
-		vo.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
-		return vo;
+	
+		return entity;
 	}
 
 	public UsersServices(UserRepository repository) {

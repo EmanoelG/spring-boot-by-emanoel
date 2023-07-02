@@ -43,4 +43,13 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 
 	}
 
+	@ExceptionHandler(br.com.emanoel.habilidades.exceptions.InvalidJWTException.class)
+	public final ResponseEntity<ExceptionResponse> InvalidJWTException(Exception ex, WebRequest request) {
+
+		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
+				request.getDescription(false));
+		return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+
+	}
+
 }
