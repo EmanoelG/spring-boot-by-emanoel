@@ -12,14 +12,11 @@ public class TokenVO implements Serializable {
 	private Boolean authenticated;
 	private Date created;
 	private Date expiration;
-	private Date accessToken;
-	private Date refreshToken;
+	private String accessToken;
+	private String refreshToken;
 
-	public TokenVO() {
-	};
-
-	public TokenVO(String userName, Boolean authenticated, Date created, Date expiration, Date accessToken,
-			Date refreshToken) {
+	public TokenVO(String userName, Boolean authenticated, Date created, Date expiration, String accessToken,
+			String refreshToken) {
 		super();
 		this.userName = userName;
 		this.authenticated = authenticated;
@@ -61,19 +58,19 @@ public class TokenVO implements Serializable {
 		this.expiration = expiration;
 	}
 
-	public Date getAccessToken() {
+	public String getAccessToken() {
 		return accessToken;
 	}
 
-	public void setAccessToken(Date accessToken) {
+	public void setAccessToken(String accessToken) {
 		this.accessToken = accessToken;
 	}
 
-	public Date getRefreshToken() {
+	public String getRefreshToken() {
 		return refreshToken;
 	}
 
-	public void setRefreshToken(Date refreshToken) {
+	public void setRefreshToken(String refreshToken) {
 		this.refreshToken = refreshToken;
 	}
 

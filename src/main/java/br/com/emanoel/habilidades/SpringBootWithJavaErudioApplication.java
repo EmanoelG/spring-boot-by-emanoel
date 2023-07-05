@@ -7,6 +7,7 @@ public class SpringBootWithJavaErudioApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootWithJavaErudioApplication.class, args);
+		
 	}
 
 }
